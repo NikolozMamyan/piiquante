@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser')
 const path = require('path');
+const helmet = require("helmet");
 const mongoose = require('mongoose');
 
 const sauceRoute = require('./Routes/sauces');
@@ -19,6 +20,7 @@ mongoose.connect(`mongodb+srv://nika67:${password}@cluster0.qmffetn.mongodb.net/
 
 const app = express();
 
+
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
@@ -35,3 +37,4 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
  
 
 module.exports = app;
+app.use(helmet());
